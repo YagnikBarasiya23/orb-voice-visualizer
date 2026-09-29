@@ -96,7 +96,7 @@ float noise(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
 return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),
 mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
 float fbm(vec3 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*noise(p);p*=2.;a*=.5;}return v;}
-float map(vec3 p){float r=1.+uAmp*.12;return length(p)-r-(uDisp+uAmp*.3)*(fbm(p*1.8+vec3(0.,0.,uPhase))-.5)*2.;}
+float map(vec3 p){float r=1.+uAmp*.12;return length(p)-r-(uDisp+uAmp*.2)*(fbm(p*1.8+vec3(0.,0.,uPhase))-.5)*2.;}
 void main(){
   vec2 uv=(gl_FragCoord.xy-.5*uRes)/min(uRes.x,uRes.y);
   vec3 ro=vec3(0.,0.,4.4),rd=normalize(vec3(uv*1.15,-1.5));
@@ -110,7 +110,7 @@ void main(){
     vec3 col=mix(uC1,uC2,band)*(.35+.65*max(dot(n,normalize(vec3(.5,.8,.6))),0.))+rim*mix(uC2,vec3(1.),.4)*1.3;
     gl_FragColor=vec4(col,1.);
   }else{
-    float g=exp(-4.*max(length(uv)-.36,0.))*(uGlow*.6+uAmp*.5);
+    float l=length(uv);float g=exp(-7.*max(l-.36,0.))*(uGlow*.6+uAmp*.5)*(1.-smoothstep(.4,.5,l));
     g=clamp(g,0.,1.);
     gl_FragColor=vec4(uC1*g,g);
   }

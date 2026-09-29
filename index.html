@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orb — voice agent visualiser</title>
+  <meta name="description" content="Orb is a zero-dependency voice agent orb: a WebGL sphere that listens, thinks and speaks, moved by live audio. MIT licensed.">
+  <meta property="og:title" content="Orb — voice agent visualiser">
+  <meta property="og:description" content="A WebGL orb for voice agents that moves with your voice. Zero dependencies, MIT.">
+  <meta property="og:image" content="og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./orb.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#">Orb<span>.</span></a>
+    <nav aria-label="Project">
+      <span class="meta">MIT · 0 deps</span>
+      <a href="https://github.com/YagnikBarasiya23/orb-voice-visualizer">GitHub</a>
+      <a href="https://www.yagnikbarasiya.com/components">More components</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Voice agent visualiser</p>
+      <h1 id="hero-title">An assistant you can <em>see</em> listening.</h1>
+      <p class="lede">A WebGL sphere that idles, listens, thinks and speaks. Each state has its own motion and colour, and live audio from your mic or the agent's voice moves the surface.</p>
+
+      <div class="stage orb-stage">
+        <div id="orb" class="demo-orb"></div>
+        <div class="controls" role="group" aria-label="Orb state">
+          <button type="button" data-state="idle" aria-pressed="true">Idle</button>
+          <button type="button" data-state="listening" aria-pressed="false">Listening</button>
+          <button type="button" data-state="thinking" aria-pressed="false">Thinking</button>
+          <button type="button" data-state="speaking" aria-pressed="false">Speaking</button>
+        </div>
+        <div class="controls" role="group" aria-label="Audio">
+          <button type="button" id="talk">Simulate a conversation</button>
+          <button type="button" id="mic">Use my microphone</button>
+        </div>
+        <label class="select">
+          <span>Colours</span>
+          <select id="palette">
+            <option value="default">Default, per state</option>
+            <option value="sunset">Sunset</option>
+            <option value="mint">Mint</option>
+            <option value="mono">Mono</option>
+          </select>
+        </label>
+        <p class="hint" id="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="usage" aria-labelledby="usage-title">
+      <h2 id="usage-title">Use it</h2>
+<pre><code>&lt;link rel="stylesheet" href="orb.css"&gt;
+&lt;div id="orb" style="width: 320px"&gt;&lt;/div&gt;
+
+&lt;script type="module"&gt;
+  import Orb from './orb.js';
+
+  const orb = new Orb(document.querySelector('#orb'));
+
+  orb.listenTo(await navigator.mediaDevices.getUserMedia({ audio: true }));
+  orb.speakFrom(document.querySelector('audio'));   // the agent's voice
+
+  orb.setState('listening');   // idle | listening | thinking | speaking
+  orb.setLevel(0.6);           // or feed loudness from a realtime API
+&lt;/script&gt;</code></pre>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>MIT © 2026 <a href="https://www.yagnikbarasiya.com">Yagnik Barasiya</a></span>
+    <span>Respects reduced motion · falls back to CSS without WebGL</span>
+  </footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
