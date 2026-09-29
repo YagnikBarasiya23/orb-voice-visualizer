@@ -1,0 +1,26 @@
+{
+  "name": "orb-voice-visualizer",
+  "version": "1.0.0",
+  "description": "A voice agent orb: a WebGL sphere that listens, thinks and speaks, moved by live audio. Zero dependencies.",
+  "type": "module",
+  "main": "orb.js",
+  "exports": {
+    ".": "./orb.js",
+    "./orb.css": "./orb.css"
+  },
+  "files": ["orb.js", "orb.css"],
+  "keywords": ["voice", "ai", "agent", "orb", "webgl", "shader", "audio-visualizer", "vanilla-js"],
+  "author": "Yagnik Barasiya (https://www.yagnikbarasiya.com)",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/YagnikBarasiya23/orb-voice-visualizer.git" },
+  "homepage": "https://yagnikbarasiya23.github.io/orb-voice-visualizer/",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  }
+}
